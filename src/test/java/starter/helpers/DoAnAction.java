@@ -15,6 +15,12 @@ public class DoAnAction {
         );
     }
 
+    public static Performable clickButtonKontakWeb () {
+        return Task.where("{0} click kontak button",
+                Click.on(InventronLandingPage.BUTTON_KONTAK)
+        );
+    }
+
     public static Performable clickButtonMulaiWeb () {
         return Task.where("{0} click mulai button",
                 Click.on(InventronLandingPage.BUTTON_MULAI)

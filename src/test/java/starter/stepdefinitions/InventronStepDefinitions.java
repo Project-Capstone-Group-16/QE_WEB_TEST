@@ -33,12 +33,15 @@ public class InventronStepDefinitions {
 
         switch (expected) {
             case "Eksplorasi" -> actor.attemptsTo(Ensure.that(InventronLandingPage.ASSERT_EKSPLORASI).hasText(text));
-
+            case "Kontak" -> actor.attemptsTo(Ensure.that(InventronLandingPage.ASSERT_KONTAK).hasText(text));
             case "Button Mulai" -> actor.attemptsTo(Ensure.that(InventronLandingPage.ASSERT_BUTTON_MULAI).hasText(text));
-
             default -> throw new IllegalStateException("Unknown expected");
         }
 
     }
 
+    @And("{actor} click button kontak")
+    public void userClickButtonKontak(Actor actor) {
+        actor.wasAbleTo(DoAnAction.clickButtonKontakWeb());
+    }
 }
