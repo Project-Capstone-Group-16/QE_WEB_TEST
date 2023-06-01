@@ -3,11 +3,12 @@ package starter.stepdefinitions;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.github.cdimascio.dotenv.Dotenv;
+//import io.github.cdimascio.dotenv.Dotenv;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.ensure.Ensure;
 import org.jetbrains.annotations.NotNull;
 import starter.helpers.DoAnAction;
+import starter.helpers.InventronLandingPage;
 import starter.helpers.NavigateTo;
 
 public class InventronStepDefinitions {
@@ -27,15 +28,17 @@ public class InventronStepDefinitions {
     public void clickButtonMulai(Actor actor) {
         actor.wasAbleTo(DoAnAction.clickButtonMulaiWeb());}
 
+    @Then("{actor} will see the content on web {string} assert {string}")
+    public void userWillSeeTheContentOnWeb(Actor actor, String text, String expected) {
 
+        switch (expected) {
+            case "Eksplorasi" -> actor.attemptsTo(Ensure.that(InventronLandingPage.ASSERT_EKSPLORASI).hasText(text));
 
+            case "Button Mulai" -> actor.attemptsTo(Ensure.that(InventronLandingPage.ASSERT_BUTTON_MULAI).hasText(text));
 
+            default -> throw new IllegalStateException("Unknown expected");
+        }
 
-
-
-
-    @Then("{actor} will see the content on web")
-    public void userWillSeeTheContentOnWeb(Actor actor) {
     }
 
 }
