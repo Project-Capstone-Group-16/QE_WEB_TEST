@@ -1,11 +1,8 @@
 package starter.helpers;
 
-import io.cucumber.java.en.Then;
-import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
-import net.serenitybdd.screenplay.actions.Enter;
 
 public class DoAnAction {
 
@@ -15,9 +12,9 @@ public class DoAnAction {
         );
     }
 
-    public static Performable clickButtonKontakWeb () {
+    public static Performable clickButtonTentangKamiWeb() {
         return Task.where("{0} click kontak button",
-                Click.on(InventronLandingPage.BUTTON_KONTAK)
+                Click.on(InventronLandingPage.BUTTON_TENTANG_KAMI)
         );
     }
 

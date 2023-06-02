@@ -11,9 +11,9 @@ public class InventronLandingPage extends PageObject {
     public static Target BUTTON_EKSPLORASI = Target.the("button eksplorasi").located(By.xpath("//a[contains(text(),'Eksplorasi')]"));
 
     public static Target BUTTON_MULAI = Target.the("button mulai").located(By.xpath("//button[contains(text(),'Mulai')]"));
-    public static Target BUTTON_KONTAK = Target.the("button kontak").located(By.xpath("//a[contains(text(),'Kontak')]"));
+    public static Target BUTTON_TENTANG_KAMI = Target.the("button tentang kami").located(By.xpath("//a[contains(text(),'Tentang Kami')]"));
     public static Target ASSERT_EKSPLORASI = Target.the("assert ekplorasi").located(By.xpath("//*[text()='Aplikasi Penyimpanan Barang yang Aman dan Terpercaya']"));
     public static Target ASSERT_BUTTON_MULAI = Target.the("assert button mulai").located(By.xpath("//*[@id='mengapa']"));
-    public static Target ASSERT_KONTAK = Target.the("assert kontak").located(By.xpath("//*[text()='Hubungi Kami']"));
+    public static Target ASSERT_TENTANG_KAMI = Target.the("assert tentang kami").located(By.xpath("//*[text()='Ayo mulai menyimpan di Inventron']"));
 
 }
