@@ -21,6 +21,7 @@ public class InventronAdminPage extends PageObject{
     public static Target TEXT_FIELD_CONFIRM_PASSWORD_REGISTER = Target.the("text field confirm password register").located(By.xpath("//input[@id='confirm_password']"));
 
 
+
     public static Target ASSERT_LOGIN_PAGE = Target.the("assert login page").located(By.xpath("//*[(text()='Belum punya akun? ')]"));
     public static Target ASSERT_REGISTER_PAGE = Target.the("assert register page").located(By.xpath("//*[(text()='Sudah memiliki akun?')]"));
 }
