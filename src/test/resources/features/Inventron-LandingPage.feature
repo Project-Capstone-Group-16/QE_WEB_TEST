@@ -19,3 +19,9 @@ Feature: LandingPage
     Given User is on inventron landing page
     And User click button tentang kami
     Then User will see the content on web "Ayo mulai menyimpan di Inventron" assert "Tentang Kami"
+
+  @LandingPage @User @NormalPositive @TentangKami
+  Scenario:  User click button unduh in website inventron for see content
+    Given User is on inventron landing page
+    And User click button unduh
+    Then User will see the content on web "Download Aplikasi Inventron Disini" assert "Button Unduh"
