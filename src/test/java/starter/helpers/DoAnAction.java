@@ -39,6 +39,12 @@ public class DoAnAction {
         );
     }
 
+    public static Performable clickButtonLogout () {
+        return Task.where("{0} click logout buton",
+                Click.on(InventronAdminPage.BUTTON_LOGOUT)
+        );
+    }
+
     public static Performable clickButtonRegisterPage () {
         return Task.where("{0} click register page buton",
                 Click.on(InventronAdminPage.BUTTON_REGISTER_PAGE)

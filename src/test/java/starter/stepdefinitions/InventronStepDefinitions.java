@@ -47,6 +47,7 @@ public class InventronStepDefinitions {
             case "Button Unduh" -> actor.attemptsTo(Ensure.that(InventronLandingPage.ASSERT_BUTTON_UNDUH).hasText(text));
             case "Login" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_LOGIN_PAGE).hasText(text));
             case "Register" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_REGISTER_PAGE).hasText(text));
+            case "Dashboard" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_DASHBOARD_PAGE).hasText(text));
             default -> throw new IllegalStateException("Unknown expected");
         }
 
@@ -85,7 +86,6 @@ public class InventronStepDefinitions {
 
     @And("{actor} input the password on field {string}")
     public void adminInputPasswordLogin (Actor actor, String passwordLogin) {
-        actor.attemptsTo(DoAnAction.fillPasswordLogin(dotenv.get(passwordLogin)));
 
         switch (passwordLogin){
             case  "passwordLogin" ->
@@ -98,7 +98,8 @@ public class InventronStepDefinitions {
 
     @And("{actor} click the button login")
     public void adminClickButtonLogin(Actor actor) {
-        actor.wasAbleTo(DoAnAction.clickButtonLogin());}
+        actor.wasAbleTo(DoAnAction.clickButtonLogin());
+    }
 
 
     @And("{actor} click register menu")
@@ -114,28 +115,33 @@ public class InventronStepDefinitions {
                     actor.attemptsTo(DoAnAction.fillNamaDepanRegister(faker.name().firstName()));
 
             case  "Nama Belakang" ->
-                    actor.attemptsTo(DoAnAction.fillNamaDepanRegister(faker.name().lastName()));
+                    actor.attemptsTo(DoAnAction.fillNamaBelakangRegister(faker.name().lastName()));
 
             case  "Email Register" -> {
                 String emailRegis = faker.internet().emailAddress();
-                actor.attemptsTo(DoAnAction.fillNamaDepanRegister(emailRegis));
+                actor.attemptsTo(DoAnAction.fillEmailRegister(emailRegis));
                 admin.setEmail(emailRegis);
             }
             case  "Telepon" ->
-                    actor.attemptsTo(DoAnAction.fillNamaDepanRegister(faker.phoneNumber().cellPhone()));
+                    actor.attemptsTo(DoAnAction.fillPhoneRegister("8232256709"));
 
             case "Password Regis" -> {
                 String passwordRegis = faker.internet().password();
-                actor.attemptsTo(DoAnAction.fillNamaDepanRegister(faker.internet().password()));
+                actor.attemptsTo(DoAnAction.fillPasswordRegister(faker.internet().password()));
                 admin.setPassword(passwordRegis);
             }
             case "Confirm Password Regis" ->
-                actor.attemptsTo(DoAnAction.fillNamaDepanRegister(admin.getPassword()));
+                actor.attemptsTo(DoAnAction.fillConfirmPasswordRegister(admin.getPassword()));
         }
     }
 
     @Then("{actor} click daftar button")
     public void adminClickDaftarButton(Actor actor) {
         actor.attemptsTo(DoAnAction.clickButtonRegister());
+    }
+
+    @Then("{actor} click the button logout")
+    public void adminClickTheButtonLogout(Actor actor) {
+        actor.wasAbleTo(DoAnAction.clickButtonLogout());
     }
 }
