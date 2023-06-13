@@ -19,7 +19,7 @@ public class InventronAdminPage extends PageObject{
     public static Target TEXT_FIELD_EMAIL_REGISTER = Target.the("text field email register").located(By.xpath("//input[@id='email']"));
     public static Target TEXT_FIELD_PHONE_NUMBER = Target.the("text field nomor telepon").located(By.xpath("//input[@id='phone_number']"));
     public static Target TEXT_FIELD_PASSWORD_REGISTER = Target.the("text field password register").located(By.xpath("//input[@id='password']"));
-    public static Target TEXT_FIELD_CONFIRM_PASSWORD_REGISTER = Target.the("text field confirm password register").located(By.xpath("(//span)[7]"));
+    public static Target TEXT_FIELD_CONFIRM_PASSWORD_REGISTER = Target.the("text field confirm password register").located(By.xpath("//input[@id='confirm_password']"));
 
 
 
