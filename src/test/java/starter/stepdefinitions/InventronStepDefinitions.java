@@ -48,6 +48,7 @@ public class InventronStepDefinitions {
             case "Login" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_LOGIN_PAGE).hasText(text));
             case "Register" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_REGISTER_PAGE).hasText(text));
             case "Dashboard" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_DASHBOARD_PAGE).hasText(text));
+            case "Kelola Barang" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_KELOLA_BARANG_PAGE).hasText(text));
             default -> throw new IllegalStateException("Unknown expected");
         }
 
@@ -67,7 +68,7 @@ public class InventronStepDefinitions {
 //--------------------------- CODE DIBAWAH UNTUK ADMIN PAGE -------------------------
 
     @Given("{actor} is on inventron login page")
-    public void userIsOnInventronLoginPage(@NotNull Actor actor){
+    public void userIsOnInventronLoginPage(Actor actor){
         actor.wasAbleTo(NavigateTo.theInventronAdminPage());
     }
 
@@ -110,28 +111,26 @@ public class InventronStepDefinitions {
     @And("{actor} input text field with {string}")
     public void adminInputTextFieldWith(Actor actor, String textField) {
 
-        switch (textField){
-            case  "Nama Depan" ->
-                    actor.attemptsTo(DoAnAction.fillNamaDepanRegister(faker.name().firstName()));
+        switch (textField) {
+            case "Nama Depan" -> actor.attemptsTo(DoAnAction.fillNamaDepanRegister(faker.name().firstName()));
 
-            case  "Nama Belakang" ->
-                    actor.attemptsTo(DoAnAction.fillNamaBelakangRegister(faker.name().lastName()));
+            case "Nama Belakang" -> actor.attemptsTo(DoAnAction.fillNamaBelakangRegister(faker.name().lastName()));
 
-            case  "Email Register" -> {
+            case "Email Register" -> {
                 String emailRegis = faker.internet().emailAddress();
                 actor.attemptsTo(DoAnAction.fillEmailRegister(emailRegis));
                 admin.setEmail(emailRegis);
             }
-            case  "Telepon" ->
-                    actor.attemptsTo(DoAnAction.fillPhoneRegister("8232256709"));
+            case "Telepon" -> actor.attemptsTo(DoAnAction.fillPhoneRegister("8232256709"));
 
             case "Password Regis" -> {
                 String passwordRegis = faker.internet().password();
-                actor.attemptsTo(DoAnAction.fillPasswordRegister(faker.internet().password()));
+                actor.attemptsTo(DoAnAction.fillPasswordRegister(passwordRegis));
                 admin.setPassword(passwordRegis);
             }
-            case "Confirm Password Regis" ->
+            case "Confirm Password Regis" -> {
                 actor.attemptsTo(DoAnAction.fillConfirmPasswordRegister(admin.getPassword()));
+            }
         }
     }
 
@@ -143,5 +142,10 @@ public class InventronStepDefinitions {
     @Then("{actor} click the button logout")
     public void adminClickTheButtonLogout(Actor actor) {
         actor.wasAbleTo(DoAnAction.clickButtonLogout());
+    }
+
+    @Then("{actor} click the button kelola barang")
+    public void adminClickTheButtonKelolaBarang(Actor actor) {
+        actor.attemptsTo(DoAnAction.clickButtonKelolaBarang());
     }
 }
