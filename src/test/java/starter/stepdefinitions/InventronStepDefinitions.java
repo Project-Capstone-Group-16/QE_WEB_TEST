@@ -49,6 +49,7 @@ public class InventronStepDefinitions {
             case "Register" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_REGISTER_PAGE).hasText(text));
             case "Dashboard" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_DASHBOARD_PAGE).hasText(text));
             case "Kelola Barang" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_KELOLA_BARANG_PAGE).hasText(text));
+            case "Kelola Warehouse" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_KELOLA_WAREHOUSE_PAGE).hasText(text));
             default -> throw new IllegalStateException("Unknown expected");
         }
 
@@ -148,4 +149,10 @@ public class InventronStepDefinitions {
     public void adminClickTheButtonKelolaBarang(Actor actor) {
         actor.attemptsTo(DoAnAction.clickButtonKelolaBarang());
     }
+
+    @Then("{actor} click the button kelola warehouse")
+    public void adminClickTheButtonKelolaWarehouse(Actor actor) {
+        actor.attemptsTo(DoAnAction.clickButtonKelolaWarehouse());
+    }
+
 }
