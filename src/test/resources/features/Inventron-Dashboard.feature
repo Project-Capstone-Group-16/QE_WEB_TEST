@@ -1,0 +1,3 @@
+@DashboardAdminInventron
+
+Feature: Dashboard

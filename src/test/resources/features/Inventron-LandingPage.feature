@@ -11,7 +11,7 @@ Feature: LandingPage
   @User @NormalPositive @Mulai
   Scenario: User click button mulai in website inventron for see content
     Given User is on inventron landing page
-    And User click button eksplorasi
+    And User click button mulai
     Then User will see the content on web "Mengapa Memilih Inventron?" assert "Button Mulai"
 
   @LandingPage @User @NormalPositive @TentangKami

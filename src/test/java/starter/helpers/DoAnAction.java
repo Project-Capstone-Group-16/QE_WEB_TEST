@@ -51,6 +51,12 @@ public class DoAnAction {
         );
     }
 
+    public static Performable clickButtonKelolaWarehouse () {
+        return Task.where("{0} click kelola barang buton",
+                Click.on(InventronAdminPage.BUTTON_KELOLA_WAREHOUSE)
+        );
+    }
+
     public static Performable clickButtonRegisterPage () {
         return Task.where("{0} click register page buton",
                 Click.on(InventronAdminPage.BUTTON_REGISTER_PAGE)
