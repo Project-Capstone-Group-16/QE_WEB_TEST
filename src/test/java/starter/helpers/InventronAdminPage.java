@@ -30,5 +30,6 @@ public class InventronAdminPage extends PageObject{
     public static Target ASSERT_DASHBOARD_PAGE = Target.the("assert dashboard page").located(By.xpath("(//*[text()='Dashboard'])[2]"));
     public static Target ASSERT_KELOLA_BARANG_PAGE = Target.the("assert kelola barang page").located(By.xpath("(//*[text()='Kelola Barang'])[2]"));
     public static Target ASSERT_KELOLA_WAREHOUSE_PAGE = Target.the("assert kelola warehouse page").located(By.xpath("//h1[contains(text(),'Kelola Warehouse')]"));
+    public static Target ASSERT_NOT_FILL_CONFIRM_PASSWORD = Target.the("assert not fill cofirm password").located(By.xpath("//div[contains(text(),'Silahkan masukkan konfirmasi password Anda!')]"));
 
 }

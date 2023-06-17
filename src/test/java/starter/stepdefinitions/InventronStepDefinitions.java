@@ -50,6 +50,7 @@ public class InventronStepDefinitions {
             case "Dashboard" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_DASHBOARD_PAGE).hasText(text));
             case "Kelola Barang" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_KELOLA_BARANG_PAGE).hasText(text));
             case "Kelola Warehouse" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_KELOLA_WAREHOUSE_PAGE).hasText(text));
+            case "Not Fill Confirm Password" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_NOT_FILL_CONFIRM_PASSWORD).hasText(text));
             default -> throw new IllegalStateException("Unknown expected");
         }
 
