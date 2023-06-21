@@ -1,9 +1,15 @@
 package starter.helpers;
 
+import net.serenitybdd.core.annotations.findby.By;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
+import net.serenitybdd.screenplay.actions.Hit;
+import org.openqa.selenium.Keys;
+import net.serenitybdd.screenplay.actions.Upload;
+
+import java.io.File;
 
 public class DoAnAction {
 
@@ -51,11 +57,52 @@ public class DoAnAction {
         );
     }
 
+    // DIBAWAH KERJAAN ABK
+
+
+
     public static Performable clickButtonKelolaWarehouse () {
-        return Task.where("{0} click kelola barang buton",
+        return Task.where("{0} click kelola warehouse buton",
                 Click.on(InventronAdminPage.BUTTON_KELOLA_WAREHOUSE)
         );
     }
+
+    public static Performable clickButtonTambahWarehouse () {
+        return Task.where("{0} click tambah data warehouse buton",
+                Click.on(InventronAdminPage.BUTTON_TAMBAH_WAREHOUSE)
+        );
+    }
+
+    public static Performable clickButtonUbahWarehouse () {
+        return Task.where("{0} click ubah data warehouse buton",
+                Click.on(InventronAdminPage.BUTTON_UBAH_WAREHOUSE)
+        );
+    }
+
+    public static Performable fillnamaDataWarehouse (String namaWarehouse) {
+        return Task.where("{0} fill nama data warehouse " + namaWarehouse,
+                Enter.theValue(namaWarehouse).into(InventronAdminPage.TEXT_FIELD_NAMA_WAREHOUSE)
+        );
+    }
+
+    public static Performable fillKotaDataWarehouse (String kotaWarehouse) {
+        return Task.where("{0} fill kota data warehouse " + kotaWarehouse,
+                Enter.theValue(kotaWarehouse).into(InventronAdminPage.TEXT_FIELD_KOTA_WAREHOUSE)
+        );
+    }
+
+    public static Performable fillAlamatDataWarehouse (String alamatWarehouse) {
+        return Task.where("{0} fill kota data warehouse " + alamatWarehouse,
+                Enter.theValue(alamatWarehouse).into(InventronAdminPage.TEXT_FIELD_ALAMAT_WAREHOUSE)
+        );
+    }
+
+    public static Performable fillDeskripsiDataWarehouse (String deskripsiWarehouse) {
+        return Task.where("{0} fill kota data warehouse " + deskripsiWarehouse,
+                Enter.theValue(deskripsiWarehouse).into(InventronAdminPage.TEXT_FIELD_DESKRIPSI_WAREHOUSE)
+        );
+    }
+    // DIATASKERJAAN ABK
 
     public static Performable clickButtonRegisterPage () {
         return Task.where("{0} click register page buton",
@@ -66,12 +113,6 @@ public class DoAnAction {
     public static Performable clickButtonRegister () {
         return Task.where("{0} click register buton",
                 Click.on(InventronAdminPage.BUTTON_REGISTER)
-        );
-    }
-
-    public static Performable clickButtonLoginPage () {
-        return Task.where("{0} click login page buton",
-                Click.on(InventronAdminPage.BUTTON_LOGIN_PAGE)
         );
     }
 
