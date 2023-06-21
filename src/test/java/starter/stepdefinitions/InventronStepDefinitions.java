@@ -6,6 +6,8 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.github.cdimascio.dotenv.Dotenv;
 import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
+import net.serenitybdd.screenplay.actions.Upload;
 import net.serenitybdd.screenplay.ensure.Ensure;
 import org.jetbrains.annotations.NotNull;
 import starter.data.Admin;
@@ -13,14 +15,23 @@ import starter.helpers.DoAnAction;
 import starter.helpers.InventronAdminPage;
 import starter.helpers.InventronLandingPage;
 import starter.helpers.NavigateTo;
+import org.openqa.selenium.WebDriver;
 
+
+import java.io.File;
+import java.net.URISyntaxException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Locale;
 
 public class InventronStepDefinitions {
 
     Faker faker = new Faker(new Locale("in-ID"));
     Admin admin = new Admin();
+    Upload upload = new Upload();
     Dotenv dotenv = Dotenv.load();
+
+    private WebDriver driver;
 
     //---------------------------CODE DIBAWAH UNTUK LANDING PAGE WEB USER ----------------------------------------------
     @Given("{actor} is on inventron landing page")
@@ -51,6 +62,7 @@ public class InventronStepDefinitions {
             case "Kelola Barang" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_KELOLA_BARANG_PAGE).hasText(text));
             case "Kelola Warehouse" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_KELOLA_WAREHOUSE_PAGE).hasText(text));
             case "Not Fill Confirm Password" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_NOT_FILL_CONFIRM_PASSWORD).hasText(text));
+            case "Tambah Data Warehouse" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_TAMBAH_DATA_WAREHOUSE).hasText(text));
             default -> throw new IllegalStateException("Unknown expected");
         }
 
@@ -68,6 +80,8 @@ public class InventronStepDefinitions {
     }
 
 //--------------------------- CODE DIBAWAH UNTUK ADMIN PAGE -------------------------
+
+
 
     @Given("{actor} is on inventron login page")
     public void userIsOnInventronLoginPage(Actor actor){
@@ -133,8 +147,42 @@ public class InventronStepDefinitions {
             case "Confirm Password Regis" -> {
                 actor.attemptsTo(DoAnAction.fillConfirmPasswordRegister(admin.getPassword()));
             }
+            case "Nama Warehouse" -> {
+                String namaWarehouse = faker.address().city();
+                actor.attemptsTo(DoAnAction.fillnamaDataWarehouse("Inventron " + namaWarehouse));
+                admin.setCity(namaWarehouse);
+            }
+            case "Kota Warehouse" -> {
+                actor.attemptsTo(DoAnAction.fillKotaDataWarehouse(admin.getCity()));
+            }
+            case "Alamat Warehouse" -> {
+                String alamatWarehouse = faker.address().fullAddress();
+                actor.attemptsTo(DoAnAction.fillAlamatDataWarehouse(alamatWarehouse));
+            }
+            case "Deskripsi Warehouse" -> {
+                String deskripsiWarehouse = faker.lorem().sentence(10);
+                actor.attemptsTo(DoAnAction.fillDeskripsiDataWarehouse(deskripsiWarehouse));
+            }
         }
     }
+
+
+    @Then("{actor} is reload the site")
+    public void adminReloadTheSite(Actor actor){
+        WebDriver driver = BrowseTheWeb.as(actor).getDriver();
+        driver.navigate().refresh();
+    }
+
+    @And("{actor} input the image")
+    public void inputTheImage (Actor actor) throws URISyntaxException {
+//        File file = new File("D:\\Kuliah\\MSIB\\GitHubDesktop\\CAPSTONE\\QE_WEB_TEST\\src\\test\\resources\\img\\Inventron.png");
+//        String filePath = String.valueOf(file);
+        Path fileToUpload = Paths.get(System.getProperty("user.dir") + "\\src\\test\\resources\\img\\Inventron.png");
+        actor.attemptsTo(Upload.theFile(fileToUpload).to(InventronAdminPage.BUTTON_UPLOAD_IMAGE_WAREHOUSE));
+
+    }
+
+
 
     @Then("{actor} click daftar button")
     public void adminClickDaftarButton(Actor actor) {
@@ -154,6 +202,16 @@ public class InventronStepDefinitions {
     @Then("{actor} click the button kelola warehouse")
     public void adminClickTheButtonKelolaWarehouse(Actor actor) {
         actor.attemptsTo(DoAnAction.clickButtonKelolaWarehouse());
+    }
+
+    @Then("{actor} click the button tambah data warehouse")
+    public void adminClickTheButtonTambahDataWarehouse(Actor actor) {
+        actor.attemptsTo(DoAnAction.clickButtonTambahWarehouse());
+    }
+
+    @Then("{actor} click the button ubah data warehouse")
+    public void adminClickTheButtonUbahDataWarehouse(Actor actor) {
+        actor.attemptsTo(DoAnAction.clickButtonUbahWarehouse());
     }
 
 }

@@ -6,6 +6,18 @@ public class Admin {
 
     String password;
 
+    String city;
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+
+
     public String getEmail() {
         return email;
     }
