@@ -4,6 +4,7 @@ import com.github.javafaker.Faker;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en_old.Ac;
 import io.github.cdimascio.dotenv.Dotenv;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
@@ -160,7 +161,7 @@ public class InventronStepDefinitions {
                 actor.attemptsTo(DoAnAction.fillAlamatDataWarehouse(alamatWarehouse));
             }
             case "Deskripsi Warehouse" -> {
-                String deskripsiWarehouse = faker.lorem().sentence(10);
+                String deskripsiWarehouse = faker.lorem().sentence(25);
                 actor.attemptsTo(DoAnAction.fillDeskripsiDataWarehouse(deskripsiWarehouse));
             }
         }
@@ -175,7 +176,7 @@ public class InventronStepDefinitions {
 
     @And("{actor} input the image")
     public void inputTheImage (Actor actor) throws URISyntaxException {
-//        File file = new File("D:\\Kuliah\\MSIB\\GitHubDesktop\\CAPSTONE\\QE_WEB_TEST\\src\\test\\resources\\img\\Inventron.png");
+//        File file = new File("D:\\Kuliah\\MSIB\\GitHubDesktop\\CAPSTONE\\QE_WEB_TEST\\src\\test\\resources\\img\\Nuries.png");
 //        String filePath = String.valueOf(file);
         Path fileToUpload = Paths.get(System.getProperty("user.dir") + "\\src\\test\\resources\\img\\Inventron.png");
         actor.attemptsTo(Upload.theFile(fileToUpload).to(InventronAdminPage.BUTTON_UPLOAD_IMAGE_WAREHOUSE));
@@ -183,6 +184,19 @@ public class InventronStepDefinitions {
     }
 
 
+    @Then("{actor} dellete the image first")
+    public void adminDelleteTheImage(Actor actor) {
+        actor.attemptsTo(DoAnAction.clickButtonDelleteTheImageWarehouse());
+    }
+
+    @Then("{actor} click the image of warehouse")
+    public void adminClickTheImage(Actor actor) {
+        actor.attemptsTo(DoAnAction.clickTheImageWarehouse());
+    }
+
+    @Then("{actor} see the image of warehouse")
+    public void adminSeeTheImage(Actor actor) {
+    }
 
     @Then("{actor} click daftar button")
     public void adminClickDaftarButton(Actor actor) {
@@ -214,4 +228,8 @@ public class InventronStepDefinitions {
         actor.attemptsTo(DoAnAction.clickButtonUbahWarehouse());
     }
 
+    @Then("{actor} click the simpan perubahan button")
+    public void  adminClickTheButtonSimpanPerubahan(Actor actor) {
+        actor.attemptsTo(DoAnAction.clickButtonSimpanPerubahanWarehouse());
+    }
 }

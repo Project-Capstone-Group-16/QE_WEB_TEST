@@ -102,6 +102,25 @@ public class DoAnAction {
                 Enter.theValue(deskripsiWarehouse).into(InventronAdminPage.TEXT_FIELD_DESKRIPSI_WAREHOUSE)
         );
     }
+
+    public static Performable clickButtonSimpanPerubahanWarehouse () {
+        return Task.where("{0} click perubahan data warehouse buton",
+                Click.on(InventronAdminPage.BUTTON_SIMPAN_WAREHOUSE)
+        );
+    }
+
+    public static Performable clickButtonDelleteTheImageWarehouse() {
+        return Task.where("{0} click perubahan data warehouse buton",
+                Click.on(InventronAdminPage.BUTTON_DELETE_IMAGE_WAREHOUSE)
+        );
+    }
+
+    public static Performable clickTheImageWarehouse () {
+        return Task.where("{0} click image warehouse buton",
+                Click.on(InventronAdminPage.BUTTON_IMAGE_WAREHOUSE)
+        );
+    }
+
     // DIATASKERJAAN ABK
 
     public static Performable clickButtonRegisterPage () {
