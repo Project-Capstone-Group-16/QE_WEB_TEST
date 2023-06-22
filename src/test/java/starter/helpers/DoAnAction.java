@@ -189,4 +189,10 @@ public class DoAnAction {
         );
     }
 
+    public static Performable clickButtonKelolaAkun () {
+        return Task.where("{0} click button kelola akun",
+                Click.on(InventronAdminPage.BUTTON_KELOLA_AKUN)
+        );
+    }
+
 }

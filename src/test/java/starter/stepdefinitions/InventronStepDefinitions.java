@@ -4,22 +4,21 @@ import com.github.javafaker.Faker;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en_old.Ac;
 import io.github.cdimascio.dotenv.Dotenv;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actions.Upload;
 import net.serenitybdd.screenplay.ensure.Ensure;
 import org.jetbrains.annotations.NotNull;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import starter.data.Admin;
 import starter.helpers.DoAnAction;
 import starter.helpers.InventronAdminPage;
 import starter.helpers.InventronLandingPage;
 import starter.helpers.NavigateTo;
-import org.openqa.selenium.WebDriver;
 
-
-import java.io.File;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -31,8 +30,6 @@ public class InventronStepDefinitions {
     Admin admin = new Admin();
     Upload upload = new Upload();
     Dotenv dotenv = Dotenv.load();
-
-    private WebDriver driver;
 
     //---------------------------CODE DIBAWAH UNTUK LANDING PAGE WEB USER ----------------------------------------------
     @Given("{actor} is on inventron landing page")
@@ -65,6 +62,7 @@ public class InventronStepDefinitions {
             case "Not Fill Confirm Password" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_NOT_FILL_CONFIRM_PASSWORD).hasText(text));
             case "Tambah Data Warehouse" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_TAMBAH_DATA_WAREHOUSE).hasText(text));
             case "Kelola Transaksi" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_KELOLA_TRANSAKSI).hasText(text));
+            case "Kelola Akun" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_KELOLA_AKUN).hasText(text));
             default -> throw new IllegalStateException("Unknown expected");
         }
 
@@ -237,5 +235,18 @@ public class InventronStepDefinitions {
     @Then("{actor} click the button kelola transaksi")
     public void adminClickTheButtonKelolaTransaksi(Actor actor) {
         actor.attemptsTo(DoAnAction.clickButtonKelolaTransaksi());
+    }
+
+    @Then("{actor} will the item on web")
+    public void adminWillTheItemOnWeb(Actor actor) {
+        WebDriver driver = BrowseTheWeb.as(actor).getDriver();
+
+//        driver.findElement(By.xpath("(//span[@id])[1])"));
+
+    }
+
+    @Then("{actor} click the button kelola akun")
+    public void adminClickTheButtonKelolaAkun(Actor actor) {
+        actor.attemptsTo(DoAnAction.clickButtonKelolaAkun());
     }
 }
