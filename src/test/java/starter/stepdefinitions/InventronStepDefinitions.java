@@ -64,6 +64,7 @@ public class InventronStepDefinitions {
             case "Kelola Warehouse" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_KELOLA_WAREHOUSE_PAGE).hasText(text));
             case "Not Fill Confirm Password" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_NOT_FILL_CONFIRM_PASSWORD).hasText(text));
             case "Tambah Data Warehouse" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_TAMBAH_DATA_WAREHOUSE).hasText(text));
+            case "Kelola Transaksi" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_KELOLA_TRANSAKSI).hasText(text));
             default -> throw new IllegalStateException("Unknown expected");
         }
 
@@ -231,5 +232,10 @@ public class InventronStepDefinitions {
     @Then("{actor} click the simpan perubahan button")
     public void  adminClickTheButtonSimpanPerubahan(Actor actor) {
         actor.attemptsTo(DoAnAction.clickButtonSimpanPerubahanWarehouse());
+    }
+
+    @Then("{actor} click the button kelola transaksi")
+    public void adminClickTheButtonKelolaTransaksi(Actor actor) {
+        actor.attemptsTo(DoAnAction.clickButtonKelolaTransaksi());
     }
 }

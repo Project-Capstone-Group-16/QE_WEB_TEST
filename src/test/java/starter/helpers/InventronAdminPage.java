@@ -13,6 +13,7 @@ public class InventronAdminPage extends PageObject{
     public static Target BUTTON_LOGIN = Target.the("button login").located(By.xpath("//*[text()='Login']"));
     public static Target BUTTON_LOGOUT = Target.the("button logout").located(By.xpath("//*[text()='Logout']"));
     public static Target BUTTON_KELOLA_BARANG = Target.the("button kelola barang").located(By.xpath("//*[text()='Kelola Barang']"));
+    public static Target BUTTON_KELOLA_TRANSAKSI = Target.the("button kelola transaksi").located(By.xpath("//a[contains(text(),'Kelola Transaksi')]"));
 
     // DIBAWAH KERJAAN ABK
     public static Target BUTTON_KELOLA_WAREHOUSE = Target.the("button kelola warehouse ").located(By.xpath("//a[contains(text(),'Kelola Warehouse')]"));
@@ -46,6 +47,7 @@ public class InventronAdminPage extends PageObject{
     public static Target ASSERT_KELOLA_WAREHOUSE_PAGE = Target.the("assert kelola warehouse page").located(By.xpath("//h1[contains(text(),'Kelola Warehouse')]"));
     public static Target ASSERT_NOT_FILL_CONFIRM_PASSWORD = Target.the("assert not fill cofirm password").located(By.xpath("//div[contains(text(),'Silahkan masukkan konfirmasi password Anda!')]"));
     public static Target ASSERT_TAMBAH_DATA_WAREHOUSE = Target.the("assert tambah data warehouse").located(By.xpath("//h4[contains(text(),'Tambah Data Warehouse')]"));
+    public static Target ASSERT_KELOLA_TRANSAKSI = Target.the("assert kelola transaksi").located(By.xpath("//h1[contains(text(),'Kelola Transaksi')]"));
 
 
 }

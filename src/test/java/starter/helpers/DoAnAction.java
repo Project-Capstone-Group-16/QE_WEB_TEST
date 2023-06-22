@@ -183,4 +183,10 @@ public class DoAnAction {
         );
     }
 
+    public static Performable clickButtonKelolaTransaksi () {
+        return Task.where("{0} click button kelola transaksi",
+                Click.on(InventronAdminPage.BUTTON_KELOLA_TRANSAKSI)
+        );
+    }
+
 }
