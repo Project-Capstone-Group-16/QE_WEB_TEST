@@ -121,6 +121,54 @@ public class DoAnAction {
         );
     }
 
+    public static Performable clickButtonKelolaAkun () {
+        return Task.where("{0} click kelola akun buton",
+                Click.on(InventronAdminPage.BUTTON_KELOLA_AKUN)
+        );
+    }
+
+    public static Performable clickButtonPegawaiAkun () {
+        return Task.where("{0} click pegawai akun buton",
+                Click.on(InventronAdminPage.BUTTON_AKUN_PEGAWAI)
+        );
+    }
+
+    public static Performable clickButtonInputDataAkun () {
+        return Task.where("{0} click input data akun admin buton",
+                Click.on(InventronAdminPage.BUTTON_INPUT_DATA_AKUN_PEGAWAI)
+        );
+    }
+
+    public static Performable fillNamaLengkapUser (String namaLengkap) {
+        return Task.where("{0} input data nama akun admin" + namaLengkap,
+                Enter.theValue(namaLengkap).into(InventronAdminPage.TEXT_FIELD_NAMA_AKUN)
+        );
+    }
+
+    public static Performable clickButtonJabatanDataAkun () {
+        return Task.where("{0} click jabatan data akun admin buton",
+                Click.on(InventronAdminPage.BUTTON_INPUT_JABATAN_AKUN_PEGAWAI)
+        );
+    }
+
+    public static Performable fillTanggalLahirDataUser (String tanggalLahir) {
+        return Task.where("{0} input data nama akun admin" + tanggalLahir,
+                Enter.theValue(tanggalLahir).into(InventronAdminPage.TEXT_FIELD_TGL_AKUN)
+        );
+    }
+
+    public static Performable fillNoHpUser (String noHp) {
+        return Task.where("{0} input data nama akun admin" + noHp,
+                Enter.theValue(noHp).into(InventronAdminPage.TEXT_FIELD_NOHP_AKUN)
+        );
+    }
+
+    public static Performable fillAlamatDataUser (String alamatPegawai) {
+        return Task.where("{0} input data nama akun admin" + alamatPegawai,
+                Enter.theValue(alamatPegawai).into(InventronAdminPage.TEXT_FIELD_ALAMAT_AKUN)
+        );
+    }
+
     // DIATASKERJAAN ABK
 
     public static Performable clickButtonRegisterPage () {

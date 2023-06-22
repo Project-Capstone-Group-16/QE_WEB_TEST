@@ -22,6 +22,14 @@ public class InventronAdminPage extends PageObject{
     public static Target BUTTON_SIMPAN_WAREHOUSE = Target.the("button simpan data warehouse ").located(By.xpath("//button[@id='save-button']"));
     public static Target BUTTON_DELETE_CONTENT_WAREHOUSE = Target.the("button delete content data warehouse ").located(By.xpath("//button[@id='reset-button']"));
     public static Target BUTTON_IMAGE_WAREHOUSE = Target.the("button image data warehouse ").located(By.xpath("//body/div[@id='root']/section[1]/section[1]/main[1]/div[1]/div[1]/div[1]"));
+    public static Target BUTTON_KELOLA_AKUN = Target.the("button kelola akun ").located(By.xpath("//a[contains(text(),'Kelola Akun')]"));
+
+    public static Target BUTTON_AKUN_PEGAWAI = Target.the("button akun pegawai").located(By.xpath("//body/div[@id='root']/section[1]/section[1]/main[1]/div[1]/div[1]/div[2]"));
+    public static Target BUTTON_INPUT_DATA_AKUN_PEGAWAI = Target.the("button input akun pegawai").located(By.xpath("//span[contains(text(),'Input Data')]"));
+    public static Target BUTTON_UPLOAD_IMAGE_AKUN_PEGAWAI = Target.the("button input akun pegawai").located(By.xpath("//input[@id='formStaff_image_url']"));
+    public static Target BUTTON_INPUT_JABATAN_AKUN_PEGAWAI = Target.the("button input akun jabatan").located(By.xpath("//input[@id='formStaff_occupation']"));
+
+
 
     // DIATASKERJAAN ABK
 
@@ -39,6 +47,12 @@ public class InventronAdminPage extends PageObject{
     public static Target TEXT_FIELD_ALAMAT_WAREHOUSE= Target.the("text field address warehouse").located(By.xpath("//input[@id='warehouseForm_address']"));
     public static Target TEXT_FIELD_DESKRIPSI_WAREHOUSE= Target.the("text field description warehouse").located(By.xpath("//textarea[@id='warehouseForm_description']"));
 
+    public static Target TEXT_FIELD_NAMA_AKUN= Target.the("text field name account").located(By.xpath("//input[@id='formStaff_full_name']"));
+    public static Target TEXT_FIELD_TGL_AKUN= Target.the("text field tgl account").located(By.xpath("//input[@id='formStaff_birth_date']"));
+    public static Target TEXT_FIELD_NOHP_AKUN= Target.the("text field nohp account").located(By.xpath("//input[@id='formStaff_phone_number']"));
+    public static Target TEXT_FIELD_ALAMAT_AKUN= Target.the("text field alamat account").located(By.xpath("//textarea[@id='formStaff_address']"));
+
+
     public static Target ASSERT_LOGIN_PAGE = Target.the("assert login page").located(By.xpath("//*[(text()='Belum punya akun? ')]"));
     public static Target ASSERT_REGISTER_PAGE = Target.the("assert register page").located(By.xpath("//*[(text()='Sudah memiliki akun?')]"));
     public static Target ASSERT_DASHBOARD_PAGE = Target.the("assert dashboard page").located(By.xpath("(//*[text()='Dashboard'])[2]"));
@@ -46,6 +60,7 @@ public class InventronAdminPage extends PageObject{
     public static Target ASSERT_KELOLA_WAREHOUSE_PAGE = Target.the("assert kelola warehouse page").located(By.xpath("//h1[contains(text(),'Kelola Warehouse')]"));
     public static Target ASSERT_NOT_FILL_CONFIRM_PASSWORD = Target.the("assert not fill cofirm password").located(By.xpath("//div[contains(text(),'Silahkan masukkan konfirmasi password Anda!')]"));
     public static Target ASSERT_TAMBAH_DATA_WAREHOUSE = Target.the("assert tambah data warehouse").located(By.xpath("//h4[contains(text(),'Tambah Data Warehouse')]"));
+    public static Target ASSERT_KELOLA_AKUN_PENGGUNA = Target.the("assert tambah data warehouse").located(By.xpath("//span[contains(text(),'Pengguna')]"));
 
 
 }

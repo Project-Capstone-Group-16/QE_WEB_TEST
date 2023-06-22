@@ -4,13 +4,14 @@ import com.github.javafaker.Faker;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en_old.Ac;
 import io.github.cdimascio.dotenv.Dotenv;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
+import net.serenitybdd.screenplay.actions.Hit;
 import net.serenitybdd.screenplay.actions.Upload;
 import net.serenitybdd.screenplay.ensure.Ensure;
 import org.jetbrains.annotations.NotNull;
+import org.openqa.selenium.Keys;
 import starter.data.Admin;
 import starter.helpers.DoAnAction;
 import starter.helpers.InventronAdminPage;
@@ -32,7 +33,6 @@ public class InventronStepDefinitions {
     Upload upload = new Upload();
     Dotenv dotenv = Dotenv.load();
 
-    private WebDriver driver;
 
     //---------------------------CODE DIBAWAH UNTUK LANDING PAGE WEB USER ----------------------------------------------
     @Given("{actor} is on inventron landing page")
@@ -64,6 +64,7 @@ public class InventronStepDefinitions {
             case "Kelola Warehouse" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_KELOLA_WAREHOUSE_PAGE).hasText(text));
             case "Not Fill Confirm Password" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_NOT_FILL_CONFIRM_PASSWORD).hasText(text));
             case "Tambah Data Warehouse" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_TAMBAH_DATA_WAREHOUSE).hasText(text));
+            case "Pengguna" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_KELOLA_AKUN_PENGGUNA).hasText(text));
             default -> throw new IllegalStateException("Unknown expected");
         }
 
@@ -164,6 +165,19 @@ public class InventronStepDefinitions {
                 String deskripsiWarehouse = faker.lorem().sentence(25);
                 actor.attemptsTo(DoAnAction.fillDeskripsiDataWarehouse(deskripsiWarehouse));
             }
+            case "Nama Lengkap" -> {
+                String namaLengkap = faker.name().fullName();
+                actor.attemptsTo(DoAnAction.fillNamaLengkapUser(namaLengkap));
+            }
+            case "Tanggal Lahir" -> {
+                actor.attemptsTo(DoAnAction.fillTanggalLahirDataUser("2002-04-25"));
+                actor.attemptsTo(Hit.the(Keys.ENTER).into("//input[@id='formStaff_birth_date']"));
+            }
+            case "No Hp Pegawai" -> actor.attemptsTo(DoAnAction.fillNoHpUser("8232256709"));
+            case "Alamat Pegawai" -> {
+                String alamatPegawai = faker.address().fullAddress();
+                actor.attemptsTo(DoAnAction.fillAlamatDataUser(alamatPegawai));
+            }
         }
     }
 
@@ -183,6 +197,12 @@ public class InventronStepDefinitions {
 
     }
 
+    @And("{actor} input the image for admin account")
+    public void inputTheImageAdminAccount (Actor actor) throws URISyntaxException {
+        Path fileToUpload = Paths.get(System.getProperty("user.dir") + "\\src\\test\\resources\\img\\Kitten.jpg");
+        actor.attemptsTo(Upload.theFile(fileToUpload).to(InventronAdminPage.BUTTON_UPLOAD_IMAGE_AKUN_PEGAWAI));
+
+    }
 
     @Then("{actor} dellete the content first")
     public void adminDelleteTheContent(Actor actor) {
@@ -232,4 +252,32 @@ public class InventronStepDefinitions {
     public void  adminClickTheButtonSimpanPerubahan(Actor actor) {
         actor.attemptsTo(DoAnAction.clickButtonSimpanPerubahanWarehouse());
     }
+
+    @Then("{actor} click the button kelola akun")
+    public void  adminClickTheButtonKelolaAkun(Actor actor) {
+        actor.attemptsTo(DoAnAction.clickButtonKelolaAkun());
+    }
+
+    @Then("{actor} click the button pegawai")
+    public void  adminClickTheButtonAkunPegawai(Actor actor) {
+        actor.attemptsTo(DoAnAction.clickButtonPegawaiAkun());
+    }
+
+    @Then("{actor} click input data button akun")
+    public void  adminClickTheButtonInputDataAkun(Actor actor) {
+        actor.attemptsTo(DoAnAction.clickButtonInputDataAkun());
+    }
+
+    @And("{actor} click the jabatan for admin account")
+    public void  adminClickTheButtonJabatanDataAkun(Actor actor) {
+        actor.attemptsTo(DoAnAction.clickButtonJabatanDataAkun());
+    }
+
+//    @And("{actor} choice manager for occupation")
+//    public void  adminClickDropdownJabatanDataAkun(Actor actor) {
+//        actor.attemptsTo(SelectByVisibleTextFromTarget."Manager");
+////        actor.attemptsTo(SelectFromOptions.byValue("Manager").from("//input[@id='formStaff_occupation']"));
+//    } MASIH PUSING PILIH DRODOWN ATAU COMBOBOX
+
+
 }
