@@ -109,9 +109,9 @@ public class DoAnAction {
         );
     }
 
-    public static Performable clickButtonDelleteTheImageWarehouse() {
+    public static Performable clickButtonDelleteTheContentWarehouse() {
         return Task.where("{0} click perubahan data warehouse buton",
-                Click.on(InventronAdminPage.BUTTON_DELETE_IMAGE_WAREHOUSE)
+                Click.on(InventronAdminPage.BUTTON_DELETE_CONTENT_WAREHOUSE)
         );
     }
 
