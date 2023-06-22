@@ -184,9 +184,9 @@ public class InventronStepDefinitions {
     }
 
 
-    @Then("{actor} dellete the image first")
-    public void adminDelleteTheImage(Actor actor) {
-        actor.attemptsTo(DoAnAction.clickButtonDelleteTheImageWarehouse());
+    @Then("{actor} dellete the content first")
+    public void adminDelleteTheContent(Actor actor) {
+        actor.attemptsTo(DoAnAction.clickButtonDelleteTheContentWarehouse());
     }
 
     @Then("{actor} click the image of warehouse")

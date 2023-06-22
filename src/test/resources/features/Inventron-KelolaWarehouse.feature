@@ -57,7 +57,7 @@ Feature: Kelola Warehouse
     Then Admin click the button kelola warehouse
     And Admin will see the content on web "Kelola Warehouse" assert "Kelola Warehouse"
     Then Admin click the button ubah data warehouse
-    Then Admin dellete the image first
+    Then Admin dellete the content first
     And Admin input the image
     And Admin input text field with "Nama Warehouse"
     And Admin input text field with "Kota Warehouse"

@@ -20,7 +20,7 @@ public class InventronAdminPage extends PageObject{
     public static Target BUTTON_UBAH_WAREHOUSE = Target.the("button ubah data warehouse ").located(By.xpath("//body/div[@id='root']/section[1]/section[1]/main[1]/div[1]/div[1]/div[5]/button[1]"));
     public static Target BUTTON_UPLOAD_IMAGE_WAREHOUSE = Target.the("button ubah data warehouse ").located(By.xpath("//input[@id='warehouseForm_image_url']"));
     public static Target BUTTON_SIMPAN_WAREHOUSE = Target.the("button simpan data warehouse ").located(By.xpath("//button[@id='save-button']"));
-    public static Target BUTTON_DELETE_IMAGE_WAREHOUSE = Target.the("button delete image data warehouse ").located(By.xpath("//span[contains(text(),'Delete Image')]"));
+    public static Target BUTTON_DELETE_CONTENT_WAREHOUSE = Target.the("button delete content data warehouse ").located(By.xpath("//button[@id='reset-button']"));
     public static Target BUTTON_IMAGE_WAREHOUSE = Target.the("button image data warehouse ").located(By.xpath("//body/div[@id='root']/section[1]/section[1]/main[1]/div[1]/div[1]/div[1]"));
 
     // DIATASKERJAAN ABK
