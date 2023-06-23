@@ -28,8 +28,9 @@ public class InventronAdminPage extends PageObject{
     public static Target BUTTON_INPUT_DATA_AKUN_PEGAWAI = Target.the("button input akun pegawai").located(By.xpath("//span[contains(text(),'Input Data')]"));
     public static Target BUTTON_UPLOAD_IMAGE_AKUN_PEGAWAI = Target.the("button input akun pegawai").located(By.xpath("//input[@id='formStaff_image_url']"));
     public static Target BUTTON_INPUT_JABATAN_AKUN_PEGAWAI = Target.the("button input akun jabatan").located(By.xpath("//input[@id='formStaff_occupation']"));
-
-
+    public static Target BUTTON_INPUT_JK_AKUN_PEGAWAI = Target.the("button input akun JK ").located(By.xpath("//input[@id='formStaff_gender']"));
+    public static Target BUTTON_SUBMIT_AKUN_PEGAWAI = Target.the("button submit akun ").located(By.xpath("//span[contains(text(),'Submit')]"));
+    public static Target BUTTON_MANAGER_AKUN_PEGAWAI = Target.the("button submit akun ").located(By.xpath("//div[text()='Manager']"));
 
     // DIATASKERJAAN ABK
 

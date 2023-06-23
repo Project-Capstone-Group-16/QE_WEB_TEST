@@ -40,10 +40,11 @@ Feature: Kelola Akun
     And Admin will see the content on web "Pengguna" assert "Pengguna"
     Then Admin click input data button akun
     And Admin input the image for admin account
-    And Admin input text field with "Nama Lengkap"
-#    And Admin click the jabatan for admin account
-#    And Admin choice manager for occupation
-#    And Admin input text field with "Tanggal Lahir"
+    And Admin click the input field tanggal lahir
+    And Admin click the jabatan for admin account
+#    And Admin click the jenis kelamin for admin account
     And Admin input text field with "No Hp Pegawai"
     And Admin input text field with "Alamat Pegawai"
+    And Admin input text field with "Nama Lengkap"
+    Then Admin click submit button
 

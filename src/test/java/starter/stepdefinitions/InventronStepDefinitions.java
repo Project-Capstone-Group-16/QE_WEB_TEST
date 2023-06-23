@@ -4,15 +4,23 @@ import com.github.javafaker.Faker;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.eo.Do;
+import io.cucumber.java.eo.Se;
 import io.github.cdimascio.dotenv.Dotenv;
 import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
-import net.serenitybdd.screenplay.actions.Hit;
-import net.serenitybdd.screenplay.actions.Upload;
+import net.serenitybdd.screenplay.actions.*;
+import net.serenitybdd.screenplay.actions.selectactions.SelectByVisibleTextFromTarget;
 import net.serenitybdd.screenplay.ensure.Ensure;
+import net.serenitybdd.screenplay.ui.Dropdown;
+import net.serenitybdd.screenplay.ui.Select;
 import org.jetbrains.annotations.NotNull;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import starter.data.Admin;
+import starter.data.Jabatan;
 import starter.helpers.DoAnAction;
 import starter.helpers.InventronAdminPage;
 import starter.helpers.InventronLandingPage;
@@ -32,6 +40,9 @@ public class InventronStepDefinitions {
     Admin admin = new Admin();
     Upload upload = new Upload();
     Dotenv dotenv = Dotenv.load();
+    Jabatan jabatan = new Jabatan();
+
+    WebDriver driver ;
 
 
     //---------------------------CODE DIBAWAH UNTUK LANDING PAGE WEB USER ----------------------------------------------
@@ -169,10 +180,13 @@ public class InventronStepDefinitions {
                 String namaLengkap = faker.name().fullName();
                 actor.attemptsTo(DoAnAction.fillNamaLengkapUser(namaLengkap));
             }
-            case "Tanggal Lahir" -> {
-                actor.attemptsTo(DoAnAction.fillTanggalLahirDataUser("2002-04-25"));
-                actor.attemptsTo(Hit.the(Keys.ENTER).into("//input[@id='formStaff_birth_date']"));
-            }
+//            case "Tanggal Lahir" -> {
+//                actor.attemptsTo(DoAnAction.fillTanggalLahirDataUser("2002-04-25"));
+//                driver.findElement(By.xpath("//input[@id='formStaff_phone_number']"));
+//                driver.findElement(By.xpath("//span[contains(text(),'Submit')]")).sendKeys(Keys.ENTER);
+//                actor.attemptsTo(Hit.the(Keys.ENTER).into("//input[@id='formStaff_birth_date']"));
+//
+//            }
             case "No Hp Pegawai" -> actor.attemptsTo(DoAnAction.fillNoHpUser("8232256709"));
             case "Alamat Pegawai" -> {
                 String alamatPegawai = faker.address().fullAddress();
@@ -270,14 +284,33 @@ public class InventronStepDefinitions {
 
     @And("{actor} click the jabatan for admin account")
     public void  adminClickTheButtonJabatanDataAkun(Actor actor) {
+//        actor.attemptsTo(DoAnAction.clickButtonJabatanDataAkun());
         actor.attemptsTo(DoAnAction.clickButtonJabatanDataAkun());
+        actor.attemptsTo(SelectFromOptions.byVisibleText("Manager").from("//input[@id='formStaff_occupation']"));
+
     }
 
-//    @And("{actor} choice manager for occupation")
-//    public void  adminClickDropdownJabatanDataAkun(Actor actor) {
-//        actor.attemptsTo(SelectByVisibleTextFromTarget."Manager");
-////        actor.attemptsTo(SelectFromOptions.byValue("Manager").from("//input[@id='formStaff_occupation']"));
-//    } MASIH PUSING PILIH DRODOWN ATAU COMBOBOX
 
+    @And("{actor} click the jenis kelamin for admin account")
+    public void  adminClickTheButtonJkDataAkun(Actor actor) {
+        actor.attemptsTo(DoAnAction.clickButtonJenisKelaminDataAkun());
+        actor.attemptsTo(DoAnAction.clickButtonJenisKelaminPerempuanDataAkun());
+    }
+
+    @And("{actor} click the input field tanggal lahir")
+    public void  adminClickDropdownTanggalDataAkun(Actor actor) {
+        actor.attemptsTo(DoAnAction.clickTheField());
+        actor.attemptsTo(DoAnAction.clickTheYearOne());
+        actor.attemptsTo(DoAnAction.clickTheHoverLeft());
+        actor.attemptsTo(DoAnAction.clickTheHoverLeft());
+        actor.attemptsTo(DoAnAction.clickTheYearTwo());
+        actor.attemptsTo(DoAnAction.clickTheMonth());
+        actor.attemptsTo(DoAnAction.clickTheDate());
+    }
+
+    @Then("{actor} click submit button")
+    public void  adminClickTheButtonSubmitDataAkun(Actor actor) {
+        actor.attemptsTo(DoAnAction.clickButtonSubmitDataAkun());
+    }
 
 }
