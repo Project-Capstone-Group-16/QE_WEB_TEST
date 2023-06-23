@@ -1,17 +1,21 @@
 package starter.helpers;
 
-import net.serenitybdd.core.annotations.findby.By;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
 import net.serenitybdd.screenplay.actions.Hit;
+import net.serenitybdd.screenplay.ui.Dropdown;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import net.serenitybdd.screenplay.actions.Upload;
+
 
 import java.io.File;
 
 public class DoAnAction {
+
+
 
     public static Performable clickButtonEksplorasiWeb () {
         return Task.where("{0} click eksplorasi button",
@@ -121,6 +125,118 @@ public class DoAnAction {
         );
     }
 
+    public static Performable clickButtonKelolaAkun () {
+        return Task.where("{0} click kelola akun buton",
+                Click.on(InventronAdminPage.BUTTON_KELOLA_AKUN)
+        );
+    }
+
+    public static Performable clickButtonPegawaiAkun () {
+        return Task.where("{0} click pegawai akun buton",
+                Click.on(InventronAdminPage.BUTTON_AKUN_PEGAWAI)
+        );
+    }
+
+    public static Performable clickButtonInputDataAkun () {
+        return Task.where("{0} click input data akun admin buton",
+                Click.on(InventronAdminPage.BUTTON_INPUT_DATA_AKUN_PEGAWAI)
+        );
+    }
+
+    public static Performable fillNamaLengkapUser (String namaLengkap) {
+        return Task.where("{0} input data nama akun admin" + namaLengkap,
+                Enter.theValue(namaLengkap).into(InventronAdminPage.TEXT_FIELD_NAMA_AKUN)
+        );
+    }
+
+    public static Performable clickButtonJabatanDataAkun () {
+        return Task.where("{0} click jabatan data akun admin buton",
+                Click.on(InventronAdminPage.BUTTON_INPUT_JABATAN_AKUN_PEGAWAI)
+        );
+    }
+
+    public static Performable clickButtonJabatanManagerDataAkun () {
+        return Task.where("{0} click jabatan Manager data akun admin buton",
+                Click.on(Dropdown.withNameOrId("formStaff_occupation").inside(String.valueOf(0)))
+        );
+    }
+
+    public static Performable clickButtonJenisKelaminDataAkun () {
+        return Task.where("{0} click jenis kelamin data akun admin buton",
+                Click.on(InventronAdminPage.BUTTON_INPUT_JK_AKUN_PEGAWAI)
+        );
+    }
+    public static Performable clickButtonJenisKelaminPerempuanDataAkun () {
+        return Task.where("{0} click jenis kelamin data akun admin buton",
+                Click.on(By.xpath("//input[@aria-activedescendant='formStaff_gender_list_1']"))
+        );
+    }
+
+    public static Performable fillTanggalLahirDataUser (String tanggalLahir) {
+        return Task.where("{0} input data nama akun admin" + tanggalLahir,
+                Enter.theValue(tanggalLahir).into(InventronAdminPage.TEXT_FIELD_TGL_AKUN)
+        );
+    }
+
+    public static Performable fillNoHpUser (String noHp) {
+        return Task.where("{0} input data nama akun admin" + noHp,
+                Enter.theValue(noHp).into(InventronAdminPage.TEXT_FIELD_NOHP_AKUN)
+        );
+    }
+
+    public static Performable fillAlamatDataUser (String alamatPegawai) {
+        return Task.where("{0} input data nama akun admin" + alamatPegawai,
+                Enter.theValue(alamatPegawai).into(InventronAdminPage.TEXT_FIELD_ALAMAT_AKUN)
+        );
+    }
+
+    public static Performable clickTheField () {
+        return Task.where("{0} click tanggal lahir field",
+                Click.on(By.xpath("//input[@id='formStaff_birth_date']"))
+        );
+    }
+    public static Performable clickTheYearOne () {
+        return Task.where("{0} click hover buton",
+                Click.on(By.xpath("//button[contains(text(),'2023')]"))
+        );
+    }
+
+    public static Performable clickTheHoverLeft () {
+        return Task.where("{0} click hover buton",
+                Click.on(By.xpath("//body/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/button[1]/span[1]"))
+        );
+    }
+
+    public static Performable clickTheYearTwo () {
+        return Task.where("{0} click tahun lahir akun buton",
+                Click.on(By.xpath("//div[contains(text(),'2002')]"))
+        );
+    }
+
+    public static Performable clickTheMonth () {
+        return Task.where("{0} click bulan lahir akun buton",
+                Click.on(By.xpath("//div[contains(text(),'Apr')]"))
+        );
+    }
+
+    public static Performable clickTheDate () {
+        return Task.where("{0} click tanggal lahir akun buton",
+                Click.on(By.xpath("//div[contains(text(),'25')]"))
+        );
+    }
+
+    public static Performable clickButtonSubmitDataAkun () {
+        return Task.where("{0} click submit data akun buton",
+                Click.on(InventronAdminPage.BUTTON_SUBMIT_AKUN_PEGAWAI)
+        );
+    }
+
+    public static Performable clickDropDownManager () {
+        return Task.where("{0} click dropdown manager buton",
+                Click.on(InventronAdminPage.BUTTON_MANAGER_AKUN_PEGAWAI)
+        );
+    }
+
     // DIATASKERJAAN ABK
 
     public static Performable clickButtonRegisterPage () {
@@ -186,12 +302,6 @@ public class DoAnAction {
     public static Performable clickButtonKelolaTransaksi () {
         return Task.where("{0} click button kelola transaksi",
                 Click.on(InventronAdminPage.BUTTON_KELOLA_TRANSAKSI)
-        );
-    }
-
-    public static Performable clickButtonKelolaAkun () {
-        return Task.where("{0} click button kelola akun",
-                Click.on(InventronAdminPage.BUTTON_KELOLA_AKUN)
         );
     }
 

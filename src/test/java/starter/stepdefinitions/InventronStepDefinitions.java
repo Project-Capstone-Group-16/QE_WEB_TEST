@@ -4,21 +4,31 @@ import com.github.javafaker.Faker;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.eo.Do;
+import io.cucumber.java.eo.Se;
 import io.github.cdimascio.dotenv.Dotenv;
 import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
-import net.serenitybdd.screenplay.actions.Upload;
+import net.serenitybdd.screenplay.actions.*;
+import net.serenitybdd.screenplay.actions.selectactions.SelectByVisibleTextFromTarget;
 import net.serenitybdd.screenplay.ensure.Ensure;
+import net.serenitybdd.screenplay.ui.Dropdown;
+import net.serenitybdd.screenplay.ui.Select;
 import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import starter.data.Admin;
+import starter.data.Jabatan;
 import starter.helpers.DoAnAction;
 import starter.helpers.InventronAdminPage;
 import starter.helpers.InventronLandingPage;
 import starter.helpers.NavigateTo;
+import org.openqa.selenium.WebDriver;
 
+
+import java.io.File;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -30,6 +40,10 @@ public class InventronStepDefinitions {
     Admin admin = new Admin();
     Upload upload = new Upload();
     Dotenv dotenv = Dotenv.load();
+    Jabatan jabatan = new Jabatan();
+
+    WebDriver driver ;
+
 
     //---------------------------CODE DIBAWAH UNTUK LANDING PAGE WEB USER ----------------------------------------------
     @Given("{actor} is on inventron landing page")
@@ -61,8 +75,7 @@ public class InventronStepDefinitions {
             case "Kelola Warehouse" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_KELOLA_WAREHOUSE_PAGE).hasText(text));
             case "Not Fill Confirm Password" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_NOT_FILL_CONFIRM_PASSWORD).hasText(text));
             case "Tambah Data Warehouse" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_TAMBAH_DATA_WAREHOUSE).hasText(text));
-            case "Kelola Transaksi" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_KELOLA_TRANSAKSI).hasText(text));
-            case "Kelola Akun" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_KELOLA_AKUN).hasText(text));
+            case "Pengguna" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_KELOLA_AKUN_PENGGUNA).hasText(text));
             default -> throw new IllegalStateException("Unknown expected");
         }
 
@@ -163,6 +176,22 @@ public class InventronStepDefinitions {
                 String deskripsiWarehouse = faker.lorem().sentence(25);
                 actor.attemptsTo(DoAnAction.fillDeskripsiDataWarehouse(deskripsiWarehouse));
             }
+            case "Nama Lengkap" -> {
+                String namaLengkap = faker.name().fullName();
+                actor.attemptsTo(DoAnAction.fillNamaLengkapUser(namaLengkap));
+            }
+//            case "Tanggal Lahir" -> {
+//                actor.attemptsTo(DoAnAction.fillTanggalLahirDataUser("2002-04-25"));
+//                driver.findElement(By.xpath("//input[@id='formStaff_phone_number']"));
+//                driver.findElement(By.xpath("//span[contains(text(),'Submit')]")).sendKeys(Keys.ENTER);
+//                actor.attemptsTo(Hit.the(Keys.ENTER).into("//input[@id='formStaff_birth_date']"));
+//
+//            }
+            case "No Hp Pegawai" -> actor.attemptsTo(DoAnAction.fillNoHpUser("8232256709"));
+            case "Alamat Pegawai" -> {
+                String alamatPegawai = faker.address().fullAddress();
+                actor.attemptsTo(DoAnAction.fillAlamatDataUser(alamatPegawai));
+            }
         }
     }
 
@@ -182,6 +211,12 @@ public class InventronStepDefinitions {
 
     }
 
+    @And("{actor} input the image for admin account")
+    public void inputTheImageAdminAccount (Actor actor) throws URISyntaxException {
+        Path fileToUpload = Paths.get(System.getProperty("user.dir") + "\\src\\test\\resources\\img\\Kitten.jpg");
+        actor.attemptsTo(Upload.theFile(fileToUpload).to(InventronAdminPage.BUTTON_UPLOAD_IMAGE_AKUN_PEGAWAI));
+
+    }
 
     @Then("{actor} dellete the content first")
     public void adminDelleteTheContent(Actor actor) {
@@ -232,21 +267,50 @@ public class InventronStepDefinitions {
         actor.attemptsTo(DoAnAction.clickButtonSimpanPerubahanWarehouse());
     }
 
-    @Then("{actor} click the button kelola transaksi")
-    public void adminClickTheButtonKelolaTransaksi(Actor actor) {
-        actor.attemptsTo(DoAnAction.clickButtonKelolaTransaksi());
-    }
-
-    @Then("{actor} will the item on web")
-    public void adminWillTheItemOnWeb(Actor actor) {
-        WebDriver driver = BrowseTheWeb.as(actor).getDriver();
-
-//        driver.findElement(By.xpath("(//span[@id])[1])"));
-
-    }
-
     @Then("{actor} click the button kelola akun")
-    public void adminClickTheButtonKelolaAkun(Actor actor) {
+    public void  adminClickTheButtonKelolaAkun(Actor actor) {
         actor.attemptsTo(DoAnAction.clickButtonKelolaAkun());
     }
+
+    @Then("{actor} click the button pegawai")
+    public void  adminClickTheButtonAkunPegawai(Actor actor) {
+        actor.attemptsTo(DoAnAction.clickButtonPegawaiAkun());
+    }
+
+    @Then("{actor} click input data button akun")
+    public void  adminClickTheButtonInputDataAkun(Actor actor) {
+        actor.attemptsTo(DoAnAction.clickButtonInputDataAkun());
+    }
+
+    @And("{actor} click the jabatan for admin account")
+    public void  adminClickTheButtonJabatanDataAkun(Actor actor) {
+//        actor.attemptsTo(DoAnAction.clickButtonJabatanDataAkun());
+        actor.attemptsTo(DoAnAction.clickButtonJabatanDataAkun());
+        actor.attemptsTo(SelectFromOptions.byVisibleText("Manager").from("//input[@id='formStaff_occupation']"));
+
+    }
+
+
+    @And("{actor} click the jenis kelamin for admin account")
+    public void  adminClickTheButtonJkDataAkun(Actor actor) {
+        actor.attemptsTo(DoAnAction.clickButtonJenisKelaminDataAkun());
+        actor.attemptsTo(DoAnAction.clickButtonJenisKelaminPerempuanDataAkun());
+    }
+
+    @And("{actor} click the input field tanggal lahir")
+    public void  adminClickDropdownTanggalDataAkun(Actor actor) {
+        actor.attemptsTo(DoAnAction.clickTheField());
+        actor.attemptsTo(DoAnAction.clickTheYearOne());
+        actor.attemptsTo(DoAnAction.clickTheHoverLeft());
+        actor.attemptsTo(DoAnAction.clickTheHoverLeft());
+        actor.attemptsTo(DoAnAction.clickTheYearTwo());
+        actor.attemptsTo(DoAnAction.clickTheMonth());
+        actor.attemptsTo(DoAnAction.clickTheDate());
+    }
+
+    @Then("{actor} click submit button")
+    public void  adminClickTheButtonSubmitDataAkun(Actor actor) {
+        actor.attemptsTo(DoAnAction.clickButtonSubmitDataAkun());
+    }
+
 }
