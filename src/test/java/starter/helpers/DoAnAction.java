@@ -9,7 +9,7 @@ import net.serenitybdd.screenplay.ui.Dropdown;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import net.serenitybdd.screenplay.actions.Upload;
-import starter.data.Jabatan;
+
 
 import java.io.File;
 
@@ -296,6 +296,12 @@ public class DoAnAction {
     public static Performable fillConfirmPasswordRegister (String conformPasswordRegis) {
         return Task.where("{0} fill password register" + conformPasswordRegis,
                 Enter.theValue(conformPasswordRegis).into(InventronAdminPage.TEXT_FIELD_CONFIRM_PASSWORD_REGISTER)
+        );
+    }
+
+    public static Performable clickButtonKelolaTransaksi () {
+        return Task.where("{0} click button kelola transaksi",
+                Click.on(InventronAdminPage.BUTTON_KELOLA_TRANSAKSI)
         );
     }
 
