@@ -77,6 +77,7 @@ public class InventronStepDefinitions {
             case "Not Fill Confirm Password" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_NOT_FILL_CONFIRM_PASSWORD).hasText(text));
             case "Tambah Data Warehouse" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_TAMBAH_DATA_WAREHOUSE).hasText(text));
             case "Pengguna" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_KELOLA_AKUN_PENGGUNA).hasText(text));
+            case "Pegawai" -> actor.attemptsTo(Ensure.that(InventronAdminPage.BUTTON_AKUN_PEGAWAI).hasText(text));
             default -> throw new IllegalStateException("Unknown expected");
         }
 
@@ -139,7 +140,9 @@ public class InventronStepDefinitions {
     }
 
     @And("{actor} input text field with {string}")
-    public void adminInputTextFieldWith(Actor actor, String textField) {
+    public void adminInputTextFieldWith(Actor actor, String textField) throws InterruptedException {
+
+//        Thread.sleep(3000);
 
 
         switch (textField) {
@@ -182,13 +185,6 @@ public class InventronStepDefinitions {
                 String namaLengkap = faker.name().fullName();
                 actor.attemptsTo(DoAnAction.fillNamaLengkapUser(namaLengkap));
             }
-//            case "Tanggal Lahir" -> {
-//                actor.attemptsTo(DoAnAction.fillTanggalLahirDataUser("2002-04-25"));
-//                driver.findElement(By.xpath("//input[@id='formStaff_phone_number']"));
-//                driver.findElement(By.xpath("//span[contains(text(),'Submit')]")).sendKeys(Keys.ENTER);
-//                actor.attemptsTo(Hit.the(Keys.ENTER).into("//input[@id='formStaff_birth_date']"));
-//
-//            }
             case "No Hp Pegawai" -> actor.attemptsTo(DoAnAction.fillNoHpUser("8232256709"));
             case "Alamat Pegawai" -> {
                 String alamatPegawai = faker.address().fullAddress();
@@ -215,7 +211,7 @@ public class InventronStepDefinitions {
 
     @And("{actor} input the image for admin account")
     public void inputTheImageAdminAccount (Actor actor) throws URISyntaxException {
-        Path fileToUpload = Paths.get(System.getProperty("user.dir") + "\\src\\test\\resources\\img\\Kitten.jpg");
+        Path fileToUpload = Paths.get(System.getProperty("user.dir") + "\\src\\test\\resources\\img\\Inventron.png");
         actor.attemptsTo(Upload.theFile(fileToUpload).to(InventronAdminPage.BUTTON_UPLOAD_IMAGE_AKUN_PEGAWAI));
 
     }
@@ -343,10 +339,10 @@ public class InventronStepDefinitions {
     }
 
     @And("{actor} delete value on text field")
-    public void adminDeleteValueOnTextField(Actor actor) throws InterruptedException {
-
-        Thread.sleep(3000);
-        driver.findElement(By.id("formStaff_address")).clear();
+    public void adminDeleteValueOnTextField(Actor actor) {
+        actor.attemptsTo(DoAnAction.clickResetPegawai());
+        actor.attemptsTo(DoAnAction.clickResetImagePegawai());
 
     }
+
 }

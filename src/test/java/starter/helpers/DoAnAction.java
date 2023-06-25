@@ -168,7 +168,19 @@ public class DoAnAction {
     }
     public static Performable clickButtonJenisKelaminPerempuanDataAkun () {
         return Task.where("{0} click jenis kelamin data akun admin buton",
-                Click.on(By.xpath("(//div[text()='Wanita'])[2]"))
+                Click.on(By.xpath("//div[@title=\"Pria\"]"))
+        );
+    }
+
+    public static Performable clickResetPegawai() {
+        return Task.where("{0} click reset data admin buton",
+                Click.on(By.xpath("//button[@id='btn-reset-pegawai']"))
+        );
+    }
+
+    public static Performable clickResetImagePegawai() {
+        return Task.where("{0} click reset image admin buton",
+                Click.on(By.xpath("//button[@id='btn-delete-image']"))
         );
     }
 

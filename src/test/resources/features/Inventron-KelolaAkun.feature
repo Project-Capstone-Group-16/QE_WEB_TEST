@@ -62,6 +62,12 @@ Feature: Kelola Akun
     And Admin will see the content on web "Pengguna" assert "Pengguna"
     Then Admin click "edit" data button akun
     And Admin delete value on text field
+    And Admin input the image for admin account
+    And Admin input text field with "Nama Lengkap"
+    And Admin click the jabatan for admin account
+    And Admin click the jenis kelamin for admin account
+    And Admin click the input field tanggal lahir
+    And Admin input text field with "No Hp Pegawai"
     And Admin input text field with "Alamat Pegawai"
     Then Admin click submit "edit" button
 
