@@ -11,6 +11,7 @@ public class NavigateTo {
                 Open.browserOn().the(InventronLandingPage.class));
     }
 
+
     public static Performable theInventronAdminPage(){
         return Task.where("{0} opens the Inventron admin page",
                 Open.browserOn().the(InventronAdminPage.class));
