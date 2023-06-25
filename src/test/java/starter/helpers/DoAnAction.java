@@ -335,5 +335,11 @@ public class DoAnAction {
         );
     }
 
+    public static Performable clickButtonDeletePegawai () {
+        return Task.where("{0} click button delete warehouse",
+                Click.on(By.xpath("(//button[@id=\"btn-hapus-pegawai\"])[1]"))
+        );
+    }
+
 
 }

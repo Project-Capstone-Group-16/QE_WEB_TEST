@@ -276,6 +276,7 @@ public class InventronStepDefinitions {
         switch (menu){
             case "input" -> actor.attemptsTo(DoAnAction.clickButtonInputDataAkun());
             case "edit" -> actor.attemptsTo(DoAnAction.clickButtonEditAkun());
+            case "delete" -> actor.attemptsTo(DoAnAction.clickButtonDeletePegawai());
         }
     }
 
