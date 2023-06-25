@@ -345,4 +345,9 @@ public class InventronStepDefinitions {
 
     }
 
+    @Then("{actor} click the button delete data warehouse")
+    public void adminClickTheButtonDeleteDataWarehouse(Actor actor) {
+        actor.attemptsTo(DoAnAction.clickButtonDeleteWarehouse());
+
+    }
 }

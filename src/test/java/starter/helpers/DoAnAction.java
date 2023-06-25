@@ -329,5 +329,11 @@ public class DoAnAction {
         );
     }
 
+    public static Performable clickButtonDeleteWarehouse () {
+        return Task.where("{0} click button delete warehouse",
+                Click.on(By.xpath("(//button[@class=\"_delete-button_agoe2_114\"])[1]"))
+        );
+    }
+
 
 }

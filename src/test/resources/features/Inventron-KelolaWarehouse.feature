@@ -65,3 +65,15 @@ Feature: Kelola Warehouse
     And Admin input text field with "Deskripsi Warehouse"
     Then Admin click the simpan perubahan button
     And Admin will see the content on web "Kelola Warehouse" assert "Kelola Warehouse"
+
+  @Admin @NormalPositive @DeleteWarehouse
+  Scenario: Admin will delete warehouse on kelola warehouse in website Inventron
+    Given Admin is on inventron login page
+    Then Admin will see the content on web "Belum punya akun? Daftar" assert "Login"
+    And Admin input the email on field "emailLogin"
+    And Admin input the password on field "passwordLogin"
+    And Admin click the button login
+    And Admin will see the content on web "Dashboard" assert "Dashboard"
+    Then Admin click the button "Kelola Warehouse"
+    And Admin will see the content on web "Kelola Warehouse" assert "Kelola Warehouse"
+    Then Admin click the button delete data warehouse
