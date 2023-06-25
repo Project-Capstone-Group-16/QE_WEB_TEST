@@ -335,6 +335,12 @@ public class DoAnAction {
         );
     }
 
+    public static Performable clickButtonConfirmDeleteStaff () {
+        return Task.where("{0} click button confirm delete staff",
+                Click.on(By.xpath("//span[contains(text(),'OK')]"))
+        );
+    }
+
     public static Performable clickButtonDeletePegawai () {
         return Task.where("{0} click button delete warehouse",
                 Click.on(By.xpath("(//button[@id=\"btn-hapus-pegawai\"])[1]"))
