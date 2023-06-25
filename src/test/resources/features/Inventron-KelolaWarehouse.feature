@@ -54,7 +54,7 @@ Feature: Kelola Warehouse
     And Admin input the password on field "passwordLogin"
     And Admin click the button login
     And Admin will see the content on web "Dashboard" assert "Dashboard"
-    Then Admin click the button kelola warehouse
+    Then Admin click the button "Kelola Warehouse"
     And Admin will see the content on web "Kelola Warehouse" assert "Kelola Warehouse"
     Then Admin click the button ubah data warehouse
     Then Admin dellete the content first

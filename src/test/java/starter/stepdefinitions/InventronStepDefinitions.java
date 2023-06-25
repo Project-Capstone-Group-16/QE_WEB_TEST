@@ -4,31 +4,28 @@ import com.github.javafaker.Faker;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.eo.Do;
-import io.cucumber.java.eo.Se;
 import io.github.cdimascio.dotenv.Dotenv;
 import net.serenitybdd.screenplay.Actor;
-import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
-import net.serenitybdd.screenplay.actions.*;
-import net.serenitybdd.screenplay.actions.selectactions.SelectByVisibleTextFromTarget;
+import net.serenitybdd.screenplay.actions.SelectFromOptions;
+import net.serenitybdd.screenplay.actions.Upload;
 import net.serenitybdd.screenplay.ensure.Ensure;
-import net.serenitybdd.screenplay.ui.Dropdown;
-import net.serenitybdd.screenplay.ui.Select;
+import net.thucydides.core.annotations.Managed;
 import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
 import starter.data.Admin;
-import starter.data.Jabatan;
 import starter.helpers.DoAnAction;
 import starter.helpers.InventronAdminPage;
 import starter.helpers.InventronLandingPage;
 import starter.helpers.NavigateTo;
-import org.openqa.selenium.WebDriver;
 
-
-import java.io.File;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -40,9 +37,12 @@ public class InventronStepDefinitions {
     Admin admin = new Admin();
     Upload upload = new Upload();
     Dotenv dotenv = Dotenv.load();
-    Jabatan jabatan = new Jabatan();
 
-    WebDriver driver ;
+    @Managed (driver = "chrome")
+    WebDriver driver;
+
+
+
 
 
     //---------------------------CODE DIBAWAH UNTUK LANDING PAGE WEB USER ----------------------------------------------
@@ -73,6 +73,7 @@ public class InventronStepDefinitions {
             case "Dashboard" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_DASHBOARD_PAGE).hasText(text));
             case "Kelola Barang" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_KELOLA_BARANG_PAGE).hasText(text));
             case "Kelola Warehouse" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_KELOLA_WAREHOUSE_PAGE).hasText(text));
+            case "Kelola Transaksi" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_KELOLA_TRANSAKSI).hasText(text));
             case "Not Fill Confirm Password" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_NOT_FILL_CONFIRM_PASSWORD).hasText(text));
             case "Tambah Data Warehouse" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_TAMBAH_DATA_WAREHOUSE).hasText(text));
             case "Pengguna" -> actor.attemptsTo(Ensure.that(InventronAdminPage.ASSERT_KELOLA_AKUN_PENGGUNA).hasText(text));
@@ -139,6 +140,7 @@ public class InventronStepDefinitions {
 
     @And("{actor} input text field with {string}")
     public void adminInputTextFieldWith(Actor actor, String textField) {
+
 
         switch (textField) {
             case "Nama Depan" -> actor.attemptsTo(DoAnAction.fillNamaDepanRegister(faker.name().firstName()));
@@ -267,32 +269,32 @@ public class InventronStepDefinitions {
         actor.attemptsTo(DoAnAction.clickButtonSimpanPerubahanWarehouse());
     }
 
-    @Then("{actor} click the button kelola akun")
-    public void  adminClickTheButtonKelolaAkun(Actor actor) {
-        actor.attemptsTo(DoAnAction.clickButtonKelolaAkun());
-    }
-
     @Then("{actor} click the button pegawai")
     public void  adminClickTheButtonAkunPegawai(Actor actor) {
         actor.attemptsTo(DoAnAction.clickButtonPegawaiAkun());
     }
 
-    @Then("{actor} click input data button akun")
-    public void  adminClickTheButtonInputDataAkun(Actor actor) {
-        actor.attemptsTo(DoAnAction.clickButtonInputDataAkun());
+    @Then("{actor} click {string} data button akun")
+    public void  adminClickTheButtonInputDataAkun(Actor actor, String menu) {
+
+        switch (menu){
+            case "input" -> actor.attemptsTo(DoAnAction.clickButtonInputDataAkun());
+            case "edit" -> actor.attemptsTo(DoAnAction.clickButtonEditAkun());
+        }
     }
 
     @And("{actor} click the jabatan for admin account")
-    public void  adminClickTheButtonJabatanDataAkun(Actor actor) {
-//        actor.attemptsTo(DoAnAction.clickButtonJabatanDataAkun());
+    public void  adminClickTheButtonJabatanDataAkun(Actor actor){
+
         actor.attemptsTo(DoAnAction.clickButtonJabatanDataAkun());
-        actor.attemptsTo(SelectFromOptions.byVisibleText("Manager").from("//input[@id='formStaff_occupation']"));
+        actor.attemptsTo(DoAnAction.clickButtonJabatanManagerDataAkun());
 
     }
 
 
     @And("{actor} click the jenis kelamin for admin account")
-    public void  adminClickTheButtonJkDataAkun(Actor actor) {
+    public void  adminClickTheButtonJkDataAkun(Actor actor){
+
         actor.attemptsTo(DoAnAction.clickButtonJenisKelaminDataAkun());
         actor.attemptsTo(DoAnAction.clickButtonJenisKelaminPerempuanDataAkun());
     }
@@ -308,9 +310,43 @@ public class InventronStepDefinitions {
         actor.attemptsTo(DoAnAction.clickTheDate());
     }
 
-    @Then("{actor} click submit button")
-    public void  adminClickTheButtonSubmitDataAkun(Actor actor) {
-        actor.attemptsTo(DoAnAction.clickButtonSubmitDataAkun());
+    @Then("{actor} click submit {string} button")
+    public void  adminClickTheButtonSubmitDataAkun(Actor actor, String opsi) {
+
+        switch (opsi){
+            case "create" -> actor.attemptsTo(DoAnAction.clickButtonSubmitDataAkun());
+            case "edit" -> actor.attemptsTo(DoAnAction.clickButtonSubmitEditAkun());
+        }
+
     }
 
+    @Then("{actor} will see the item on web for menu {string}")
+    public void adminWillTheItemOnWeb(Actor actor, String menu) {
+
+        switch (menu){
+            case "Kelola Brang" -> driver.findElement(By.xpath("(//span[@id=\"tag__barang\"])[1]"));
+            case "Kelola Transaksi" -> driver.findElement(By.xpath("(//td[text()='kategori loker'])[1]"));
+
+        }
+    }
+
+    @Then("{actor} click the button {string}")
+    public void adminClickTheButton(Actor actor, String menu) {
+
+        switch (menu){
+            case "Kelola Akun" -> actor.attemptsTo(DoAnAction.clickButtonKelolaAkun());
+            case "Kelola Barang" -> actor.attemptsTo(DoAnAction.clickButtonKelolaBarang());
+            case "Kelola Warehouse" -> actor.attemptsTo(DoAnAction.clickButtonKelolaWarehouse());
+            case "Kelola Transaksi" -> actor.attemptsTo(DoAnAction.clickButtonKelolaTransaksi());
+        }
+
+    }
+
+    @And("{actor} delete value on text field")
+    public void adminDeleteValueOnTextField(Actor actor) throws InterruptedException {
+
+        Thread.sleep(3000);
+        driver.findElement(By.id("formStaff_address")).clear();
+
+    }
 }

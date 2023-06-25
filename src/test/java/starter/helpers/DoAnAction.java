@@ -157,7 +157,7 @@ public class DoAnAction {
 
     public static Performable clickButtonJabatanManagerDataAkun () {
         return Task.where("{0} click jabatan Manager data akun admin buton",
-                Click.on(Dropdown.withNameOrId("formStaff_occupation").inside(String.valueOf(0)))
+                Click.on(By.xpath("//div[@title=\"Manager\"]"))
         );
     }
 
@@ -168,7 +168,7 @@ public class DoAnAction {
     }
     public static Performable clickButtonJenisKelaminPerempuanDataAkun () {
         return Task.where("{0} click jenis kelamin data akun admin buton",
-                Click.on(By.xpath("//input[@aria-activedescendant='formStaff_gender_list_1']"))
+                Click.on(By.xpath("(//div[text()='Wanita'])[2]"))
         );
     }
 
@@ -304,5 +304,18 @@ public class DoAnAction {
                 Click.on(InventronAdminPage.BUTTON_KELOLA_TRANSAKSI)
         );
     }
+
+    public static Performable clickButtonEditAkun () {
+        return Task.where("{0} click button edit akun",
+                Click.on(InventronAdminPage.BUTTON_EDIT_AKUN)
+        );
+    }
+
+    public static Performable clickButtonSubmitEditAkun () {
+        return Task.where("{0} click button submit edit akun",
+                Click.on(InventronAdminPage.BUTTON_SUBMIT_EDIT_AKUN_PEGAWAI)
+        );
+    }
+
 
 }
